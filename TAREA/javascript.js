@@ -213,28 +213,28 @@ function formatMinutes(minutes) {
 // Función para crear una tarjeta de jugador
 function createPlayerCard(player) {
     return `
-        <div class="player-card">
-            <img src="${player.imagen}" alt="${player.nombre} ${player.apellido}" class="player-image">
-            <div class="player-info">
-                <h2 class="player-name">${player.nombre} ${player.apellido}</h2>
-                <span class="player-number">#${player.dorsal} · ${player.nacionalidad}</span>
-                <div class="player-stats">
-                    <div class="stat">
-                        <div class="stat-value">${player.goles}</div>
-                        <div class="stat-label">Goles</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">${player.asistencias}</div>
-                        <div class="stat-label">Asistencias</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">${formatMinutes(player.minutos)}</div>
-                        <div class="stat-label">Tiempo Jugado</div>
-                    </div>
+    <div class="player-card">
+        <img src="${player.imagen}" alt="${player.nombre} ${player.apellido}" class="player-image">
+        <div class="player-info">
+            <h2 class="player-name">${player.nombre} ${player.apellido}</h2>
+            <span class="player-number">#${player.dorsal} · ${player.nacionalidad}</span>
+            <div class="player-stats">
+                <div class="stat">
+                    <div class="stat-value">${player.goles}</div>
+                    <div class="stat-label">Goles</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">${player.asistencias}</div>
+                    <div class="stat-label">Asistencias</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">${formatMinutes(player.minutos)}</div>
+                    <div class="stat-label">Tiempo Jugado</div>
                 </div>
             </div>
         </div>
-    `;
+    </div>
+`;
 }
 function renderPlayers(isLeyendas) {
     const playersGrid = document.getElementById('players-grid');
