@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editor de Email Avanzado</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="email-editor">
+            <div class="email-header">
+                <input type="text" id="to" placeholder="Para:" class="email-input">
+                <input type="text" id="cc" placeholder="CC:" class="email-input">
+                <input type="text" id="subject" placeholder="Asunto:" class="email-input">
+            </div>
+            
+            <div class="toolbar">
+                <div class="toolbar-group">
+                    <button onclick="execCommand('undo')" title="Deshacer">
+                        <i class="fas fa-undo"></i>
+                    </button>
+                    <button onclick="execCommand('redo')" title="Rehacer">
+                        <i class="fas fa-redo"></i>
+                    </button>
+                </div>
+
+                <div class="toolbar-group">
+                    <button onclick="execCommand('bold')" title="Negrita">
+                        <i class="fas fa-bold"></i>
+                    </button>
+                    <button onclick="execCommand('italic')" title="Cursiva">
+                        <i class="fas fa-italic"></i>
+                    </button>
+                    <button onclick="execCommand('underline')" title="Subrayado">
+                        <i class="fas fa-underline"></i>
+                    </button>
+                    <button onclick="execCommand('strikeThrough')" title="Tachado">
+                        <i class="fas fa-strikethrough"></i>
+                    </button>
+                </div>
+
+                <div class="toolbar-group">
+                    <button onclick="execCommand('insertUnorderedList')" title="Lista">
+                        <i class="fas fa-list-ul"></i>
+                    </button>
+                    <button onclick="execCommand('insertOrderedList')" title="Lista Numerada">
+                        <i class="fas fa-list-ol"></i>
+                    </button>
+                    <button onclick="execCommand('indent')" title="Aumentar Sangría">
+                        <i class="fas fa-indent"></i>
+                    </button>
+                    <button onclick="execCommand('outdent')" title="Reducir Sangría">
+                        <i class="fas fa-outdent"></i>
+                    </button>
+                </div>
+
+                <div class="toolbar-group">
+                    <button onclick="execCommand('justifyLeft')" title="Alinear izquierda">
+                        <i class="fas fa-align-left"></i>
+                    </button>
+                    <button onclick="execCommand('justifyCenter')" title="Centrar">
+                        <i class="fas fa-align-center"></i>
+                    </button>
+                    <button onclick="execCommand('justifyRight')" title="Alinear derecha">
+                        <i class="fas fa-align-right"></i>
+                    </button>
+                    <button onclick="execCommand('justifyFull')" title="Justificar">
+                        <i class="fas fa-align-justify"></i>
+                    </button>
+                </div>
+
+                <div class="toolbar-group">
+                    <input type="color" id="colorPicker" onchange="execCommandWithArg('foreColor', this.value)" title="Color de texto">
+                    <input type="color" id="bgColorPicker" onchange="execCommandWithArg('hiliteColor', this.value)" title="Color de fondo">
+                    <button onclick="insertLink()" title="Insertar enlace">
+                        <i class="fas fa-link"></i>
+                    </button>
+                    <button onclick="insertImage()" title="Insertar imagen">
+                        <i class="fas fa-image"></i>
+                    </button>
+                </div>
+
+                <select onchange="execCommandWithArg('fontSize', this.value)" title="Tamaño de letra">
+                    <option value="1">Pequeño</option>
+                    <option value="3" selected>Normal</option>
+                    <option value="5">Grande</option>
+                    <option value="7">Muy Grande</option>
+                </select>
+
+                <select onchange="execCommandWithArg('fontName', this.value)" title="Tipo de letra">
+                    <option value="Arial" selected>Arial</option>
+                    <option value="Times New Roman">Times New Roman</option>
+                    <option value="Courier New">Courier New</option>
+                    <option value="Georgia">Georgia</option>
+                    <option value="Verdana">Verdana</option>
+                </select>
+
+                <div class="search-container">
+                    <input type="text" id="searchInput" placeholder="Buscar texto...">
+                    <button onclick="searchText()" title="Buscar">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <button onclick="replaceText()" title="Reemplazar">
+                        <i class="fas fa-exchange-alt"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="formatting-info">
+                Palabras: <span id="wordCount">0</span> | 
+                Caracteres: <span id="charCount">0</span>
+            </div>
+
+            <div id="editor" contenteditable="true" class="editor-content"></div>
+
+            <div class="attachment-area" id="attachmentArea">
+                <p>Archivos adjuntos:</p>
+                <div id="attachmentList"></div>
+            </div>
+
+            <div class="email-footer">
+                <button onclick="addAttachment()" class="attachment-button">
+                    <i class="fas fa-paperclip"></i> Adjuntar
+                </button>
+                <button onclick="saveAsDraft()" class="draft-button">
+                    <i class="fas fa-save"></i> Guardar borrador
+                </button>
+                <button onclick="sendEmail()" class="send-button">
+                    <i class="fas fa-paper-plane"></i> Enviar
+                </button>
+            </div>
+        </div>
+    </div>
+    <script src="javascript.js"></script>
+</body>
+</html>
